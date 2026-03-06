@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 
 const timetableDB = mysql.createConnection({
-  host: 'localhost',
+  host: 'mariadb',
   user: 'college_user',
   password: 'deereddy@123',
   database: 'timetable_db'

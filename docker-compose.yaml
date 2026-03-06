@@ -1,0 +1,33 @@
+name: Duniversity-app
+
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./db/init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - Dnet
+
+  duniversity-frontend:
+    build: .
+    container_name: duniversity-frontend
+    restart: always
+    ports:
+      - 3001:3000
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    networks:
+      - Dnet
+
+networks:
+  Dnet:
+    driver: bridge
