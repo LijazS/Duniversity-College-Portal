@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap 
+metadata:
+  name: uni-config 
+data:
+  
+  MARIADB_ROOT_PASSWORD: Root@123
+
+
+  MARIADB_USER: college_user
+  MARIADB_PASSWORD: deereddy@123
+
+  # Default database user and password
+  DB_USER: college_user
+  DB_PASSWORD: deereddy@123
+
+  # Database host and port for backend
+  DB_HOST: mariadb
+  DB_PORT: 3306
+
+  # Default databases your backend uses
+  GRIEVANCE_DB: grievance_db
+  LEAVE_DB: leave_db
+  TIMETABLE_DB: timetable_db
+  EXAMS_DB: exams_db

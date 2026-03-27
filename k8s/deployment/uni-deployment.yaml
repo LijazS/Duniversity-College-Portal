@@ -1,0 +1,25 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: uni-app
+  namespace: uni-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uni-app
+  template:
+    metadata:
+      labels:
+        app: uni-app
+    spec:
+      containers:
+      - name: uni-container
+        image: lijazs/duniversity:v1.0.0
+        ports: 
+        - containerPort: 3000
+        envFrom:
+          configMapRef:
+            - name: uni-config
+        
+    

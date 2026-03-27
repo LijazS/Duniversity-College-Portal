@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: HTTPRoute
+metadata:
+  name: uni-route
+  namespace: uni-ns
+spec:
+  parentRefs:
+  - name: new-gateway
+    namespace: l-ns
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: uni-service
+      port: 3306
