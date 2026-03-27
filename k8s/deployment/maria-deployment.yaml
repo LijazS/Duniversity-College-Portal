@@ -12,25 +12,26 @@ spec:
     metadata:
       labels:
         app: mariadb
-    containers:
-    - name: mariadb-container
-      image: mariadb:11
-      ports:
-      - containerPort: 3306
-      envFrom:
-        configMapRef:
-        - name: uni-config
-      volumeMounts:
+    spec:
+      containers:
+      - name: mariadb-container
+        image: mariadb:11
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: uni-config
+        volumeMounts:
+        - name: mariadb-storage
+          mountPath: /var/lib/mysql
+        
+        - name: mariadb-init
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
       - name: mariadb-storage
-        mountPath: /var/lib/mysql
+        persistentVolumeClaim: 
+          claimName: uni-pvc
       
       - name: mariadb-init
-        mountPath: /docker-entrypoint-initdb.d
-    volumes:
-    - name: mariadb-storage
-      persistentVolumeClaim: 
-        claimName: uni-pvc
-    
-    - name: mariadb-init
-      configMap:
-        name: mariadb-init-script
+        configMap:
+          name: mariadb-init-script
