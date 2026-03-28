@@ -1,10 +1,12 @@
 apiVersion: apps/v1 
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mariadb
   namespace: uni-ns
 spec:
   replicas: 1
+  minReadySeconds: 10
+  serviceName: mariadb
   selector:
     matchLabels:
       app: mariadb 
@@ -13,6 +15,7 @@ spec:
       labels:
         app: mariadb
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
       - name: mariadb-container
         image: mariadb:11
@@ -28,10 +31,17 @@ spec:
         - name: mariadb-init
           mountPath: /docker-entrypoint-initdb.d
       volumes:
-      - name: mariadb-storage
-        persistentVolumeClaim: 
-          claimName: uni-pvc
-      
+
       - name: mariadb-init
         configMap:
           name: mariadb-init-script
+  volumeClaimTemplates:
+  - metadata:
+      name: mariadb-storage
+    spec:
+      storageClassName: fitness-sc
+      accessModes:
+      - ReadWriteMany
+      resources:
+        requests:
+          storage: 2Gi
