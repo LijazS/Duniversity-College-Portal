@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap 
 metadata:
-  name: uni-config 
+  name: uni-config-front
   namespace: uni-ns
 data:
   
