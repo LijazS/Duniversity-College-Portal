@@ -16,7 +16,7 @@ data:
   DB_PASSWORD: deereddy@123
 
   # Database host and port for backend
-  DB_HOST: mariadb-primary
+  DB_HOST: my-mariadb-primary.mysql.svc.cluster.local
   DB_PORT: "3306"
 
   # Default databases your backend uses
