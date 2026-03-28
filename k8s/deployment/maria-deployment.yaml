@@ -4,7 +4,7 @@ metadata:
   name: mariadb
   namespace: uni-ns
 spec:
-  replicas: 1
+  replicas: 3
   minReadySeconds: 10
   serviceName: mariadb
   selector:
