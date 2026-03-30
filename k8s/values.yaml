@@ -3,3 +3,6 @@ app:
 
 replicaCount: 1
 
+image:
+  repository: lijazs/duniversity
+  tag: v1.0.0
