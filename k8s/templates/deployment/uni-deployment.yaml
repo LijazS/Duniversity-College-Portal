@@ -1,10 +1,10 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: uni-app
+  name: {{ .Values.app.name }}
   namespace: uni-ns
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: uni-app
