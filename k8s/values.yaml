@@ -1,8 +1,21 @@
+appNs: uni-ns
+
 app:
   name: uni-app
+  replicaCount: 1
+  image:
+    repository: lijazs/duniversity
+    tag: v1.0.0
 
-replicaCount: 1
 
-image:
-  repository: lijazs/duniversity
-  tag: v1.0.0
+db:
+  name: mariadb
+  replicaCount: 3
+  minReadySeconds: 10
+  terminationGracePeriodSeconds: 10
+  storageClassName: fitness-sc
+  image:
+    repository: mariadb
+    tag: 11
+
+frontendConfig: uni-config 

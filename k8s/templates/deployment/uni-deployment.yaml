@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.app.name }}
-  namespace: uni-ns
+  namespace: {{ .Values.appNs }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.app.replicaCount }}
   selector:
     matchLabels:
       app: uni-app
@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - name: uni-container
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        image: {{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}
         ports: 
         - containerPort: 3000
         envFrom:
         - configMapRef:
-            name: uni-config
+            name: {{ .Values.frontendConfig }}
         
     

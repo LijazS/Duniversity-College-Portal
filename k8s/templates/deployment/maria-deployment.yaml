@@ -1,11 +1,11 @@
 apiVersion: apps/v1 
 kind: StatefulSet
 metadata:
-  name: mariadb
-  namespace: uni-ns
+  name: {{ .Values.db.name }}
+  namespace: {{ .Values.appNs }}
 spec:
-  replicas: 3
-  minReadySeconds: 10
+  replicas: {{ .Values.db.replicaCount }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
   serviceName: mariadb
   selector:
     matchLabels:
@@ -15,15 +15,15 @@ spec:
       labels:
         app: mariadb
     spec:
-      terminationGracePeriodSeconds: 10
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
       - name: mariadb-container
-        image: mariadb:11
+        image: {{ .Values.db.image.name }}:{{ .Values.db.image.tag }}
         ports:
         - containerPort: 3306
         envFrom:
         - configMapRef:
-            name: uni-config
+            name: {{ .Values.frontendConfig }}
         volumeMounts:
         - name: mariadb-storage
           mountPath: /var/lib/mysql
@@ -39,7 +39,7 @@ spec:
   - metadata:
       name: mariadb-storage
     spec:
-      storageClassName: fitness-sc
+      storageClassName: {{ .Values.db.storageClassName }}
       accessModes:
       - ReadWriteMany
       resources:

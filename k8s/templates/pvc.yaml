@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: uni-pvc
-  namespace: uni-ns
+  namespace: {{ .Values.appNs }}
 spec:
   storageClassName: fitness-sc
   accessModes:
