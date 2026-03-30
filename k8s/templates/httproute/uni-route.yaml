@@ -5,8 +5,8 @@ metadata:
   namespace: uni-ns
 spec:
   parentRefs:
-  - name: new-gateway
-    namespace: l-ns
+  - name: sales-gateway
+    namespace: sales-gateway-ns
   rules:
   - matches:
     - path:
