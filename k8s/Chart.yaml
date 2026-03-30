@@ -1,0 +1,7 @@
+apiVersion: v2
+name: duniversity-projecy
+description: duniversity app
+type: application
+version: 1.1.0    # THis is the chart version
+appVersion: 1.1.0     #  Apps version  
+
